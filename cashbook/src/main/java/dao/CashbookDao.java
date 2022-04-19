@@ -13,11 +13,11 @@ import java.util.Map;
 public class CashbookDao {
 	public List<Map<String,Object>> selectCashbookListByMonth(int year, int month){
 		List<Map<String,Object>> list = new ArrayList<>();
-		// SELECT cashbook_no cashbookNo, DAY(cash_date) day, kind, cash FROM cashbook WHERE YEAR(cash_date) =? AND MONTH(cash_date) = ? ORDER BY cash_date ASC
+		// SELECT cashbook_no cashbookNo, DAY(cash_date) day, kind, cash, LEFT(memo,5) memo FROM cashbook WHERE YEAR(cash_date) =? AND MONTH(cash_date) = ? ORDER BY cash_date ASC
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT cashbook_no cashbookNo, DAY(cash_date) day, kind, cash FROM cashbook WHERE YEAR(cash_date) =? AND MONTH(cash_date) = ? ORDER BY cash_date ASC";
+		String sql = "SELECT cashbook_no cashbookNo, DAY(cash_date) day, kind, cash, LEFT(memo,5) memo FROM cashbook WHERE YEAR(cash_date) =? AND MONTH(cash_date) = ? ORDER BY DAY(cash_date) ASC, kind ASC";
 		
 		try {
 			// DB접속
@@ -34,9 +34,10 @@ public class CashbookDao {
 			while(rs.next()) {
 				Map<String,Object> m = new HashMap<String,Object>();
 				m.put("cashbookNo", rs.getInt("cashbookNo"));
-				m.put("day", rs.getString("day"));
+				m.put("day", rs.getInt("day"));
 				m.put("kind", rs.getString("kind"));
 				m.put("cash", rs.getInt("cash"));
+				m.put("memo", rs.getString("memo"));
 				list.add(m);
 			}
 		} catch (Exception e) {
