@@ -8,14 +8,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>cashbookOne</title>
+	<meta charset="UTF-8">
+	<title>cashbookOne</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<div>
+	<div class="container-fluid">
 		<h1>cashbookOne(상세정보)</h1>	
-		<table border ="1">
-			<thead>
+		<table class ="table table-bordered">
+			<thead class="thead-dark">
 				<th>kind</th>
 				<th>cash</th>
 				<th>memo</th>

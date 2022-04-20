@@ -23,6 +23,10 @@ public class CashbookDao {
 		PreparedStatement stmt = null;
 		try {
 			// cashbook삭제
+			/* String sql = " DELETE c,h FROM cashbook c"
+			+ " INNER JOIN hashtag h "
+			+ " WHERE c.cashbook_no = ? AND c.cashbook_no = h.cashbook_no"; --> inner join으로 해서 한번에 삭제 가능
+			*/
 			String sql = "DELETE FROM cashbook WHERE cashbook_no = ?"; 
 			conn = DBUtil.getConnection(); // DB접속
 			conn.setAutoCommit(false); // 자동커밋 해제
@@ -58,7 +62,7 @@ public class CashbookDao {
 			}
 		}
 		return row;
-	}
+	} 
 
 	// cashbook 상세열람
 	public Cashbook selectCashbook(int cashbookNo) {

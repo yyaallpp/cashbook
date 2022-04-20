@@ -2,15 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>insertCashbookForm</title>
+	<meta charset="UTF-8">
+	<title>insertCashbookForm</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<div>
-	
+	<div class="container-fluid">
 		<h1>insertCashbookForm</h1>
 		<form actoin="<%=request.getContextPath()%>/InsertCashbookController" method="post">
-			<table border = "1">
+			<table class="table">
 				<tr>
 					<td>날짜</td>
 					<td><input type="text" name="cashDate" value="<%=(String)request.getAttribute("cashDate")%>" readonly="readonly"></td>
@@ -32,7 +32,7 @@
 					<td><textarea rows="4" cols="50" name="memo"></textarea></td>
 				</tr>
 			</table>		
-			<button type="submit">입력</button>
+			<button class ="btn btn-danger" type="submit">입력</button>
 		</form>
 		
 	</div>
