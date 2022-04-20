@@ -72,7 +72,7 @@
 					%>
 								<td class ="<%=c%>"> 
 									<%=i-startBlank%> 
-									<a href="<%=request.getContextPath()%>/InsertCashbookController?year=<%=year%>&month=<%=month%>&day<%=i-startBlank%>" class="btn btn-light">입력</a> 
+									<a href="<%=request.getContextPath()%>/InsertCashbookController?year=<%=year%>&month=<%=month%>&day=<%=i-startBlank%>" class="btn btn-light">입력</a> 
 									<div>
 										<%
 											// 해당 날짜의 cashbookList 출력 
@@ -80,9 +80,11 @@
 												 if((Integer)m.get("day") == (i-startBlank)){
 										%>
 													<div>
-														[<%=m.get("kind")%>] 
-														<%=m.get("cash")%>원
-														<%=m.get("memo")%>...												
+														<a href ="<%=request.getContextPath()%>/CashbookOneController?cashbookNo=<%=m.get("cashbookNo")%>">
+															[<%=m.get("kind")%>] 
+															<%=m.get("cash")%>원
+															<%=m.get("memo")%>...												
+														</a> 
 													</div>
 										<%			 
 												 }

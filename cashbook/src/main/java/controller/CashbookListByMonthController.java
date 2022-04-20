@@ -27,7 +27,7 @@ public class CashbookListByMonthController extends HttpServlet {
 		if(request.getParameter("month") != null) {
 			month = Integer.parseInt(request.getParameter("month"));
 		}
-		if(month == 0) {
+		if(month == 0) { // 이전 다음을 넣을 때 전 연도 또는 다음 년도로 가기 위해서
 			month = 12;
 			year -= 1;
 		}
