@@ -33,7 +33,7 @@
 		</table>
 		<div>
 			<a href="<%=request.getContextPath()%>/DeleteCashbookController?cashbookNo=<%=cashbook.getCashbookNo()%>">삭제</a>
-			<a href="<%=request.getContextPath()%>/UpdateCashbookController">수정</a>
+			<a href="<%=request.getContextPath()%>/UpdateCashbookController?cashbookNo=<%=cashbook.getCashbookNo()%>">수정</a>
 		</div>
 	</div>
 </body>

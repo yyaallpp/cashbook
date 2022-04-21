@@ -10,6 +10,9 @@
 <body>
 	<div class="container-fluid">
 		<h1>cashbookListByMonth</h1>
+		<div>
+			<a href="<%=request.getContextPath()%>/TagController?">tags</a>
+		</div>
 		<%
 			List<Map<String,Object>> list = (List<Map<String,Object>>)request.getAttribute("list");
 			int year = (Integer)request.getAttribute("year");
