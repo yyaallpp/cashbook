@@ -10,12 +10,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CashbookDao;
 
 @WebServlet("/CashbookListByMonthController")
-public class CashbookListByMonthController extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class CashbookListByMonthController extends HttpServlet {	
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		// 로그인이 된 상태면 리다이렉트
+		HttpSession session = request.getSession();
+		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+		if(sessionMemberId == null) { // 이미 로그인이 되어있는 상태면
+			response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}	
+				
 		// 1) 월별 cashbook리스트를 요쳥 분석
 		Calendar now = Calendar.getInstance();
 		int year = now.get(Calendar.YEAR);

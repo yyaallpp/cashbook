@@ -222,6 +222,7 @@ public class CashbookDao {
 		
 	}
 		
+	// member_id추가해야됨
 	// cashbook리스트 보여주기
 	public List<Map<String,Object>> selectCashbookListByMonth(int year, int month){
 		List<Map<String,Object>> list = new ArrayList<>();
