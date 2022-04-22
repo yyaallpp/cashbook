@@ -9,25 +9,42 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CashbookDao;
 import vo.Cashbook;
+import vo.Member;
 
 @WebServlet("/UpdateCashbookController")
 public class UpdateCashbookController extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		// 로그인 확인
+		HttpSession session = request.getSession();
+		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+		if(sessionMemberId == null) { // 로그인이 되어있지 않으면
+		response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}
+		
 		// cashbookOne에서 값 받아오기
 		int cashbookNo = Integer.parseInt(request.getParameter("cashbookNo"));
 		System.out.println(cashbookNo + " <-- cashbookNo UdateCashbookController doGet()"); // 디버깅
 		CashbookDao cashbookDao = new CashbookDao();
 		Cashbook cashbook = new Cashbook();
-		cashbook= cashbookDao.selectCashbook(cashbookNo); 
+		cashbook= cashbookDao.selectCashbook(cashbookNo,sessionMemberId); 
 		request.setAttribute("cashbook", cashbook);
 		request.getRequestDispatcher("WEB-INF/view/updateCashbookForm.jsp").forward(request, response);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 로그인 확인
+		HttpSession session = request.getSession();
+		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+		if(sessionMemberId == null) { // 로그인이 되어있지 않으면
+		response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}			
 		request.setCharacterEncoding("UTF-8"); // 한글 인코딩
 		
 		int cashbookNo = Integer.parseInt(request.getParameter("cashbookNo")); 
@@ -67,7 +84,7 @@ public class UpdateCashbookController extends HttpServlet {
 		cashbook.setMemo(memo);
 		
 		CashbookDao cashBookDao = new CashbookDao();
-		cashBookDao.updateCashbook(cashbook,hashtag);
+		cashBookDao.updateCashbook(cashbook,hashtag,sessionMemberId);
 		response.sendRedirect(request.getContextPath()+"/CashbookListByMonthController");
 		
 	}

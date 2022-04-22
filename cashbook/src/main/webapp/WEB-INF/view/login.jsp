@@ -10,7 +10,7 @@
 	<form action="<%=request.getContextPath()%>/LoginController" method="post">
 		<table border="1">
 			<tr>
-				<td>memerId</td>
+				<td>memerId</td>	
 				<td><input type="text" name="memberId"></td>
 			</tr>
 			<tr>
@@ -20,5 +20,8 @@
 		</table>
 		<button type="submit">로그인</button>
 	</form>
+	<div>
+		<a href="<%=request.getContextPath()%>/InsertMemberController">회원가입</a>
+	</div>
 </body>
 </html>

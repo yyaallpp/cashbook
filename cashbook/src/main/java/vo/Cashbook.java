@@ -70,5 +70,6 @@ public class Cashbook {
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
+
 	
 }

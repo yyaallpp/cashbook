@@ -4,15 +4,150 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import util.DBUtil;
 import vo.Member;
 
 public class MemberDao {
 	// 회원가입
-	// 회원수정
-	// 회원탈퇴
+	public void insertMemeber(Member member) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "INSERT INTO member(member_id, member_pw, create_date) values(?,PASSWORD(?),NOW())";
+		
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, member.getMemberId());
+			stmt.setString(2, member.getMemberPw());
+			stmt.setString(3, member.getCreateDate());
+			int row = stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("member 입력");
+			} else {
+				System.out.println("입력실패");
+			}	
+		} catch(Exception e){
+			e.printStackTrace();	
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// 회원비밀번호 수정 -> 나중에 Member에 비밀번호 말고 추가로 올수 있어서 List로함
+	public List<Member> updateMemberPw(String sessionMemberId,String memberPw) {
+		List<Member> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "UPDATE member SET member_pw = PASSWORD(?) WHERE member_id = ? ";
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberPw);
+			stmt.setString(2, sessionMemberId);
+			rs = stmt.executeQuery();
+			System.out.println(sql+ " <-- selectMemberOne");
+			Member m = null;
+			if(rs.next()) {
+				m = new Member();
+				m.setMemberId(rs.getString("memberId"));
+				m.setMemberPw(rs.getString("memberPw"));
+				m.setCreateDate(rs.getString("createDate"));
+				list.add(m);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	
+	// 회원탈퇴 -> member,cashbook도 지워야함
+	public void deleteMember(String sessioMemberId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		PreparedStatement stmt2 = null;
+		ResultSet rs = null;
+		String sql = "DELETE FROM cashbook where member_id =? ";
+		String sql2 = "DELETE FROM member where member_id = ?";
+		
+		try {
+			conn = DBUtil.getConnection();
+			conn.setAutoCommit(false); // 자동커밋 해제
+			// cashbook삭제
+			stmt = conn.prepareStatement(sql); 
+			stmt.setString(1, sessioMemberId);
+			stmt.executeUpdate();
+			// member삭제
+			stmt2 = conn.prepareStatement(sql2);
+			stmt2.setString(1, sessioMemberId);
+			stmt2.executeUpdate();
+			
+			conn.commit();
+			
+		} catch(Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	// 회원정보
+	public Member selectMemberOne(String sessionMemberId){
+		Member m = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT member_id memberId, member_pw memberPw, create_date createDate FROM member WHERE member_id = ? ";
+		
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, sessionMemberId);
+			rs = stmt.executeQuery();
+			System.out.println(sql+ " <-- selectMemberOne");
+			if(rs.next()) {
+				m = new Member();
+				m.setMemberId(rs.getString("memberId"));
+				m.setMemberPw(rs.getString("memberPw"));
+				m.setCreateDate(rs.getString("createDate"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return m;
+	}
 	
 	// 로그인
 	public String selectMemberByIdPw(Member member) {

@@ -9,6 +9,10 @@
 <body>
 	<div class="container-fluid">
 		<h1>insertCashbookForm</h1>
+		<div>
+			<%=session.getAttribute("sessionMemberId") %>님 반갑습니다.
+			<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
+		</div>
 		<form actoin="<%=request.getContextPath()%>/InsertCashbookController" method="post">
 			<table class="table">
 				<tr>

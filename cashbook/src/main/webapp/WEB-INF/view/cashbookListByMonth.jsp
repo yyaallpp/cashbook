@@ -11,10 +11,11 @@
 	<div class="container-fluid">
 		<h1>cashbookListByMonth</h1>
 		<div>
-			<%=session.getAttribute("sessionMemberId")%>님 반갑습니다.
+			<a href="<%=request.getContextPath()%>/SelectMemberOneController"><%=session.getAttribute("sessionMemberId")%></a>님 반갑습니다.
+		</div>
+		<div>
 			<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
 		</div>
-		
 		<div>
 			<a href="<%=request.getContextPath()%>/TagController">tags</a>
 		</div>

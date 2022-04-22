@@ -27,6 +27,7 @@ public class LoginController extends HttpServlet {
 		
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
+	
 	// 로그인 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 로그인이 된 상태면 리다이렉트 

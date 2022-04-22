@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CashbookDao;
 import vo.Cashbook;
@@ -17,6 +18,14 @@ import vo.Cashbook;
 public class InsertCashbookController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 로그인 상태 확인
+		HttpSession session = request.getSession();
+		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+		if(sessionMemberId == null) { // 로그인이 되어있지 않으면
+			response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}			
+		
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
@@ -30,7 +39,14 @@ public class InsertCashbookController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8"); // 인코딩
+		// 로그인 상태 확인
+		HttpSession session = request.getSession();
+		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+		if(sessionMemberId == null) { // 로그인이 되어있지 않으면
+			response.sendRedirect(request.getContextPath()+"/LoginController");
+			return;
+		}
+		request.setCharacterEncoding("utf-8"); // 한글 인코딩
 		
 		String cashDate = request.getParameter("cashDate");
 		String kind = request.getParameter("kind");
@@ -66,7 +82,7 @@ public class InsertCashbookController extends HttpServlet {
 		}
 		
 		CashbookDao cashbookDao = new CashbookDao();
-		cashbookDao.insertCashbook(cashbook, hashtag);
+		cashbookDao.insertCashbook(cashbook, hashtag,sessionMemberId);
 		response.sendRedirect(request.getContextPath()+"/CashbookListByMonthController");
 	}
 
