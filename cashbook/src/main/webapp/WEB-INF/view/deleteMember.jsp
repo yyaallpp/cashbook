@@ -17,7 +17,7 @@
 			비밀번호를 입력해주세요 
 			<input type="password" name="memberPw">
 			<input type="hidden" name="checkMemberPw" value="<%=member.getMemberPw()%>">
-			<button type="submit">삭제</button>
+			<button type="submit">탈퇴</button>
 		</form>
 	</div>
 </body>

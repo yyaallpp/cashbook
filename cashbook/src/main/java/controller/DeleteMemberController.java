@@ -49,8 +49,8 @@ public class DeleteMemberController extends HttpServlet {
 //			response.sendRedirect(request.getContextPath() + "/SelectMemberOneController");
 //			return;
 //		}		
-		memberDao.deleteMember(sessionMemberId);
-		response.sendRedirect(request.getContextPath()+"/CashbookListByMonthController");
+		memberDao.deleteMember(sessionMemberId, memberPw);
+		response.sendRedirect(request.getContextPath()+"/LogoutController");
 	}
 
 }

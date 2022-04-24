@@ -78,13 +78,13 @@ public class MemberDao {
 	}
 	
 	// 회원탈퇴 -> member,cashbook도 지워야함
-	public void deleteMember(String sessioMemberId) {
+	public void deleteMember(String sessioMemberId, String memberPw) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		PreparedStatement stmt2 = null;
 		ResultSet rs = null;
-		String sql = "DELETE FROM cashbook where member_id =? ";
-		String sql2 = "DELETE FROM member where member_id = ?";
+		String sql = "DELETE FROM cashbook WHERE member_id =? ";
+		String sql2 = "DELETE FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 		
 		try {
 			conn = DBUtil.getConnection();
@@ -96,6 +96,7 @@ public class MemberDao {
 			// member삭제
 			stmt2 = conn.prepareStatement(sql2);
 			stmt2.setString(1, sessioMemberId);
+			stmt2.setString(2, memberPw);
 			stmt2.executeUpdate();
 			
 			conn.commit();
