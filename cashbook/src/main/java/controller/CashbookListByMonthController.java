@@ -23,7 +23,7 @@ public class CashbookListByMonthController extends HttpServlet {
 		// 로그인 상태 확인
 		HttpSession session = request.getSession();
 		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
-		if(sessionMemberId == null) { // 로그인이 되어있지 않으면
+		if(sessionMemberId == null) { // 로그인이 되어있지 않으면  
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}	
