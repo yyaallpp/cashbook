@@ -32,6 +32,7 @@ public class CashbookListByMonthController extends HttpServlet {
 		this.statsDao = new StatsDao();
 		Stats stats = statsDao.selectStatsOneByNow();
 		int totalCount = statsDao.selectStatsTotalCount();
+		System.out.println(sessionMemberId + " <-- sessionMemberId CahsbookListBYController");
 		
 		// 디버깅
 		System.out.println(totalCount + " <-- totalCount IndexController");

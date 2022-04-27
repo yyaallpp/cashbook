@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+import util.DBUtil;
 import vo.Stats;
 
 public class StatsDao {
@@ -14,15 +14,11 @@ public class StatsDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		
-		String dburl = "jdbc:mariadb://localhost:3306/test";
-		String dbpw = "java1234";
-		String dbuser = "root";
-		
+
 		// INSERT INTO stats(day, cnt) VALUES(CURDATE(), 1)
 		String sql = "INSERT INTO stats(day, cnt) VALUES(CURDATE(), 1)";
 		try {
-			conn = DriverManager.getConnection(dburl,dbuser,dbpw);
+			conn = DBUtil.getConnection();
 			stmt = conn.prepareStatement(sql);		
 			stmt.executeUpdate();
 					
@@ -45,15 +41,11 @@ public class StatsDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		String dburl = "jdbc:mariadb://localhost:3306/test";
-		String dbpw = "java1234";
-		String dbuser = "root";
-		
 		// SELECT day,cnt FROM stats WHERE DAY = CURDATE()
 		String sql = "SELECT day, cnt FROM stats WHERE DAY = CURDATE()";
 		
 		try {
-			conn = DriverManager.getConnection(dburl,dbuser,dbpw);
+			conn = DBUtil.getConnection();
 			stmt = conn.prepareStatement(sql);	
 			rs = stmt.executeQuery();
 			while(rs.next()) {
@@ -79,16 +71,13 @@ public class StatsDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		
-		String dburl = "jdbc:mariadb://localhost:3306/test";
-		String dbpw = "java1234";
-		String dbuser = "root";
+
 		
 		// UPDATE stats SET cnt = cnt+1 WHERE DAY = CURDATE()
 		String sql = "UPDATE stats SET cnt = cnt+1 WHERE DAY = CURDATE()";
 		
 		try {
-			conn = DriverManager.getConnection(dburl,dbuser,dbpw);
+			conn = DBUtil.getConnection();
 			stmt = conn.prepareStatement(sql);		
 			stmt.executeUpdate();	
 		} catch(Exception e){
@@ -109,15 +98,11 @@ public class StatsDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		String dburl = "jdbc:mariadb://localhost:3306/test";
-		String dbpw = "java1234";
-		String dbuser = "root";
-		
 		// SELECT SUM(cnt) from stats 
 		String sql = "SELECT SUM(cnt) cnt from stats ";
 		
 		try {
-			conn = DriverManager.getConnection(dburl,dbuser,dbpw);
+			conn = DBUtil.getConnection();
 			stmt = conn.prepareStatement(sql);	
 			rs = stmt.executeQuery();
 			if(rs.next()) {
