@@ -19,6 +19,12 @@
 		<div>
 			<a href="<%=request.getContextPath()%>/TagController">tags</a>
 		</div>
+		<div>
+			<div>현재접속자 수 : ${currentCount}</div>
+			<div>오늘(${stats.day}) 접속자 수 : ${stats.cnt}</div>
+			<div>총 접속자 수 : ${totalCount}
+		</div>
+	</div>
 		<%
 			List<Map<String,Object>> list = (List<Map<String,Object>>)request.getAttribute("list");
 			int year = (Integer)request.getAttribute("year");

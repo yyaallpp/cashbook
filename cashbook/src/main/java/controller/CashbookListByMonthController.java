@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CashbookDao;
+import dao.StatsDao;
+import vo.Stats;
 
 @WebServlet("/CashbookListByMonthController")
 public class CashbookListByMonthController extends HttpServlet {	
-	
+	private StatsDao statsDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		// 로그인 상태 확인
 		HttpSession session = request.getSession();
@@ -25,6 +27,19 @@ public class CashbookListByMonthController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}	
+		
+		// 현재 사용자 및 전체 사용자 확인
+		this.statsDao = new StatsDao();
+		Stats stats = statsDao.selectStatsOneByNow();
+		int totalCount = statsDao.selectStatsTotalCount();
+		
+		// 디버깅
+		System.out.println(totalCount + " <-- totalCount IndexController");
+		System.out.println(stats.getCnt());
+		System.out.println(stats.getDay());	
+		
+		request.setAttribute("stats", stats);
+		request.setAttribute("totalCount", totalCount);
 				
 		// 1) 월별 cashbook리스트를 요쳥 분석
 		Calendar now = Calendar.getInstance();
