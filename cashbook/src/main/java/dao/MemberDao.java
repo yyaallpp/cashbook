@@ -17,14 +17,17 @@ public class MemberDao {
 	public void insertMemeber(Member member) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "INSERT INTO member(member_id, member_pw, create_date) values(?,PASSWORD(?),NOW())";
+		String sql = "INSERT INTO member(member_id, member_pw, phone, email, create_date, update_date) values(?,PASSWORD(?),?,?,NOW(),NOW() )";
 		
 		try {
 			conn = DBUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, member.getMemberId());
 			stmt.setString(2, member.getMemberPw());
-			stmt.setString(3, member.getCreateDate());
+			stmt.setString(3, member.getPhone());
+			stmt.setString(4, member.getEmail());
+			stmt.setString(5, member.getCreateDate());
+			stmt.setString(6, member.getUpdateDate());
 			int row = stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("member 입력");
@@ -123,7 +126,7 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT member_id memberId, member_pw memberPw, create_date createDate FROM member WHERE member_id = ? ";
+		String sql = "SELECT member_id memberId, member_pw memberPw, phone, email, create_date createDate FROM member WHERE member_id = ? ";
 		
 		try {
 			conn = DBUtil.getConnection();
@@ -135,6 +138,8 @@ public class MemberDao {
 				m = new Member();
 				m.setMemberId(rs.getString("memberId"));
 				m.setMemberPw(rs.getString("memberPw"));
+				m.setPhone(rs.getString("phone"));
+				m.setEmail(rs.getString("email"));
 				m.setCreateDate(rs.getString("createDate"));
 			}
 		} catch(Exception e) {

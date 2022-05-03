@@ -38,10 +38,15 @@ public class InsertMemberController extends HttpServlet {
 		Member member = new Member();
 		member.setMemberId(request.getParameter("memberId"));
 		member.setMemberPw(request.getParameter("memberPw"));	
+		member.setPhone(request.getParameter("phone"));	
+		member.setEmail(request.getParameter("email"));	
 		//디버깅
 		System.out.println(member.getMemberId() + " <-- memeberId InsertMemberController");
 		System.out.println(member.getMemberPw() + " <-- memeberPw InsertMemberController");
+		System.out.println(member.getPhone() + " <-- phone InsertMemberController");
+		System.out.println(member.getEmail() + " <-- eamil InsertMemberController");
 		MemberDao memberDao = new MemberDao();
+		
 		memberDao.insertMemeber(member);
 		response.sendRedirect(request.getContextPath() + "/LoginController");
 		
