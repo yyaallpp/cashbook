@@ -31,7 +31,7 @@ public class CashbookOneController extends HttpServlet {
 		Cashbook cashbookOne = cashbookDao.selectCashbook(cashbookNo,sessionMemberId);
 		request.setAttribute("cashbookOne", cashbookOne);
 		
-		request.getRequestDispatcher("WEB-INF/view/cashbookOne.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/cashbook/cashbookOne.jsp").forward(request, response);
 	}
 
 }

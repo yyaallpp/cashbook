@@ -23,6 +23,6 @@ public class HashtagOneController extends HttpServlet {
 		request.setAttribute("tagCount", tagCount);
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("/WEB-INF/view/hashtagOne.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/hashtag/hashtagOne.jsp").forward(request, response);
 	}
 }

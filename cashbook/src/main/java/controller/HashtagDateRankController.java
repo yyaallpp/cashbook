@@ -22,6 +22,6 @@ public class HashtagDateRankController extends HttpServlet {
 			request.setAttribute("cashDate", cashDate);
 			request.setAttribute("list", list);
 		}
-		request.getRequestDispatcher("/WEB-INF/view/hashtagDateRank.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/hashtag/hashtagDateRank.jsp").forward(request, response);
 	}
 }

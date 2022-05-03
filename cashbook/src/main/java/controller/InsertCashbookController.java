@@ -35,7 +35,7 @@ public class InsertCashbookController extends HttpServlet {
 		System.out.println(day + " <-- InsertCashbookController doGet()");
 		String cashDate = year + "-" + month + "-" + day ;
 		request.setAttribute("cashDate", cashDate);
-		request.getRequestDispatcher("/WEB-INF/view/insertCashbookForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/cashbook/insertCashbookForm.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

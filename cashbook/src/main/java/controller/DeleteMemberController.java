@@ -26,7 +26,7 @@ public class DeleteMemberController extends HttpServlet {
 		Member member = new Member();
 		member = (Member) memberDao.selectMemberOne(sessionMemberId);
 		request.setAttribute("member", member);		
-		request.getRequestDispatcher("WEB-INF/view/deleteMember.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/member/deleteMember.jsp").forward(request, response);
 		
 	}
 	

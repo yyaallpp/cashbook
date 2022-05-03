@@ -104,7 +104,7 @@ public class CashbookListByMonthController extends HttpServlet {
 		request.setAttribute("month", month);
 		
 		// 3) 뷰 포워딩 
-		request.getRequestDispatcher("/WEB-INF/view/cashbookListByMonth.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/cashbook/cashbookListByMonth.jsp").forward(request, response);
 	}
 
 }

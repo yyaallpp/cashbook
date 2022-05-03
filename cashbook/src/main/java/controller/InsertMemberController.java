@@ -22,7 +22,7 @@ public class InsertMemberController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/CashbookListByMonthController");
 			return;
 		}
-		request.getRequestDispatcher("WEB-INF/view/insertMember.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/member/insertMember.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

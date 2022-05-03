@@ -33,7 +33,7 @@ public class UpdateCashbookController extends HttpServlet {
 		Cashbook cashbook = new Cashbook();
 		cashbook= cashbookDao.selectCashbook(cashbookNo,sessionMemberId); 
 		request.setAttribute("cashbook", cashbook);
-		request.getRequestDispatcher("WEB-INF/view/updateCashbookForm.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/cashbook/updateCashbookForm.jsp").forward(request, response);
 	}
 	
 	@Override

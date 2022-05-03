@@ -29,7 +29,7 @@ public class SelectMemberOneController extends HttpServlet {
 		Member member = memberDao.selectMemberOne(sessionMemberId);
 		request.setAttribute("member", member);
 		
-		request.getRequestDispatcher("/WEB-INF/view/memberOne.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/member/memberOne.jsp").forward(request, response);
 		
 	}
 

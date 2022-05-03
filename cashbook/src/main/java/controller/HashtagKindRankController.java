@@ -27,6 +27,6 @@ public class HashtagKindRankController extends HttpServlet {
 			System.out.println(kind + " <-- kind HashtagKindRankController");
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/view/hashtagKindRank.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/hashtag/hashtagKindRank.jsp").forward(request, response);
 	}
 }

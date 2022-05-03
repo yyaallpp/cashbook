@@ -31,7 +31,7 @@ public class UpdateMemberPwController extends HttpServlet {
 		Member member = new Member();
 		member = (Member) memberDao.selectMemberOne(sessionMemberId);
 		request.setAttribute("member", member);		
-		request.getRequestDispatcher("WEB-INF/view/updateMemberPw.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/member/updateMemberPw.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
