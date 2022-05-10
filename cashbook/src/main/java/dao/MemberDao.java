@@ -155,6 +155,32 @@ public class MemberDao {
 		return m;
 	}
 	
+	// 회원정보 수정
+	public void updateMember(Member member,String sessionMemberId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "UPDATE member SET phone = ?, email = ?, update_date = NOW() where member_id = ?";
+		
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, member.getPhone());
+			stmt.setString(2, member.getEmail());
+			stmt.setString(3,sessionMemberId);
+			stmt.executeUpdate();	
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+		
+	}
+	
 	// 로그인
 	public String selectMemberByIdPw(Member member) {
 		String memberId = null;
