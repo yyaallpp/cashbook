@@ -9,8 +9,8 @@ public class DBUtil {
 		Connection conn = null;
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			String dburl = "jdbc:mariadb://localhost:3306/cashbook";
-			String dbpw = "java1234";
+			String dburl = "jdbc:mariadb://52.78.198.39:3306/cashbook";
+			String dbpw = "mariadb1234";
 			String dbuser = "root";
 			conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		} catch (ClassNotFoundException e) {
