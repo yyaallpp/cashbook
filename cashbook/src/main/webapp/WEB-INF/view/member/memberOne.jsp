@@ -6,15 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>memberOne</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<%
 		Member member = (Member)request.getAttribute("member");
 	%>
-	<div>
-
+	<div class="container">
 		<h1>SelectMemberOne</h1>
-		<table border="1">
+		<table class="table table-bordered">
 			<thead>
 				<th>memberId</th>
 				<th>memberPw</th>

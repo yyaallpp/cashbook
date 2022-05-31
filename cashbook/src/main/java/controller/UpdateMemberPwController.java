@@ -39,7 +39,7 @@ public class UpdateMemberPwController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
 		if(sessionMemberId == null) { // 로그인이 되어있지 않으면
-		response.sendRedirect(request.getContextPath()+"/LoginController");
+			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 
 		}
@@ -53,8 +53,15 @@ public class UpdateMemberPwController extends HttpServlet {
 		System.out.println(changeMemberPw + " <-- changeMemberPw UpdateMemberPwController");
 		
 		MemberDao memberDao = new MemberDao();
-		List<Member> list = memberDao.updateMemberPw(sessionMemberId,changeMemberPw);
+		String comparePw = memberDao.compareMemberPw(sessionMemberId, checkCurrentMemberPw);
+		System.out.println(comparePw + " <-- comparePw doPost() UpdateMemberPwController");
+		if(!comparePw.equals(currentMemberPw)) {
+			response.sendRedirect(request.getContextPath()+"/SelectMemberOneController");
+			System.out.println("비밀번호가 일치하지 않습니다.");
+			return;
+		}
 		
+		List<Member> list = memberDao.updateMemberPw(sessionMemberId,changeMemberPw);
 		response.sendRedirect(request.getContextPath() + "/LogoutController");
 	}
 

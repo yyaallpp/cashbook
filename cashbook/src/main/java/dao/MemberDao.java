@@ -80,6 +80,37 @@ public class MemberDao {
 		return list;
 	}
 	
+	// 회원의 현재 비밀번호가 일치한지 확인하는 메서드
+	 public String compareMemberPw(String sessionMemberId, String memberPw) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String result = "";
+		String sql = "SELECT member_pw memberPw FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";		
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, sessionMemberId);
+			stmt.setString(2, memberPw);
+			rs = stmt.executeQuery();
+			System.out.println(sql+ " <-- selectMemberOne");
+			if(rs.next()) {
+				result = rs.getString("memberPw");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(result + " <-- result compareMemberPw() MemberDao");
+		
+		return result;
+	 }
+	
 	// 회원탈퇴 -> member,cashbook도 지워야함
 	public void deleteMember(String sessioMemberId, String memberPw) {
 		Connection conn = null;

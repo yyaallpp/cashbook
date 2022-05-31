@@ -10,14 +10,15 @@
 <body>
 	<div class="container-fluid">
 		<h1>cashbookListByMonth</h1>
-		<div>
-			<a href="<%=request.getContextPath()%>/SelectMemberOneController"><%=session.getAttribute("sessionMemberId")%></a>님 반갑습니다.
+		<div class="row">
+		<div class="col-sm-10"></div>
+			<div class="col-sm-2">
+				<a href="<%=request.getContextPath()%>/SelectMemberOneController"><%=session.getAttribute("sessionMemberId")%></a>님 반갑습니다.
+				<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
+			</div>
 		</div>
 		<div>
-			<a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a>
-		</div>
-		<div>
-			<a href="<%=request.getContextPath()%>/TagController">tags</a>
+			<a href="<%=request.getContextPath()%>/TagController"><h4>tags</h4></a>
 		</div>
 		<div>
 			<div>현재접속자 수 : ${currentCount}</div>
